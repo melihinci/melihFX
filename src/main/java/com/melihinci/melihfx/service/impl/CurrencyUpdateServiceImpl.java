@@ -3,10 +3,12 @@ package com.melihinci.melihfx.service.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.melihinci.melihfx.model.Currency;
+import com.melihinci.melihfx.model.CurrencyLog;
+import com.melihinci.melihfx.repository.CurrencyLogRepository;
 import com.melihinci.melihfx.service.CurrencyUpdateService;
-import com.melihinci.melihfx.service.GlobalCurrencies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -15,9 +17,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Component
 public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
+
+    @Autowired
+    CurrencyLogRepository currencyLogRepository;
 
     @Value("${config.currency.service.url:http://apilayer.net/api/live}")
     private String serviceUrl;
@@ -65,6 +71,15 @@ public class CurrencyUpdateServiceImpl implements CurrencyUpdateService {
         } catch (JsonProcessingException jpex) {
             new RuntimeException(jpex.getMessage());
         }
+        logCurrencies(currencies);
         return currencies;
+    }
+
+    @Async
+    public void logCurrencies(List<Currency> currencies) {
+        List<CurrencyLog> currencyLogs = currencies.stream()
+                .map(currency -> new CurrencyLog(currency))
+                .collect(Collectors.toList());
+        currencyLogRepository.saveAll(currencyLogs);
     }
 }

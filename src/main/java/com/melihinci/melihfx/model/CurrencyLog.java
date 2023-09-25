@@ -12,7 +12,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity
 @Data
@@ -32,7 +32,7 @@ public class CurrencyLog implements Serializable {
     @Column
     private String target;
     @Column
-    private LocalDateTime logDate;
+    private Date logDate;
     @Column
     private double exchangeRate;
 
@@ -41,6 +41,6 @@ public class CurrencyLog implements Serializable {
         this.exchangeRate = currency.getExchangeRate();
         this.source = currency.getSource();
         this.target = currency.getTarget();
-        this.logDate = LocalDateTime.now();
+        this.logDate = new Date();
     }
 }

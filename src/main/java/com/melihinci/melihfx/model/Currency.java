@@ -18,11 +18,6 @@ import java.time.LocalDateTime;
 @Builder
 public class Currency implements Serializable {
 
-    public Currency(String source,String target){
-        this.source=source;
-        this.target=target;
-    }
-
     @Id
     @Column
     private String exchangeCode;

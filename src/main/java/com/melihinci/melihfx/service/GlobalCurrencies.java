@@ -28,10 +28,10 @@ public class GlobalCurrencies {
         return this.currencies;
     }
 
-    @Scheduled(fixedRate = 10000)
+    @Scheduled(fixedRate = 100000)
     public void updateCurrencies() {
         List<Currency> currenciesBuffer = currencyUpdateService.retrieveCurrencies();
-        if (currenciesBuffer.size() > 0) {
+        if (!currenciesBuffer.isEmpty()) {
             syncronizedUpdate(currenciesBuffer);
         }
     }

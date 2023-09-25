@@ -32,6 +32,12 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ex.getMessage());
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> handleException(NullPointerException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
     @PostMapping(path = "/newTransaction")
     // @ApiOperation(value = "New Transaction adding method")
     @ResponseStatus(HttpStatus.CREATED)
@@ -39,8 +45,7 @@ public class TransactionController {
         Transaction transaction=new Transaction();
         transaction.setAmount(amount);
         transaction.setCurrencyExchangeCode( sourceCurrencyCode + targetCurrencyCode);
-        ResponseEntity<Long> responseEntity=new ResponseEntity<>(transactionService.createTransaction(transaction),HttpStatus.CREATED);
-        return  responseEntity;
+        return new ResponseEntity<>(transactionService.createTransaction(transaction),HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/createTransactions")
@@ -48,14 +53,13 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<List<Long>> createTransactions(@RequestParam String sourceCurrencyCode, @RequestParam List<String> targetCurrencyCodes, @RequestParam float amount) {
         List<Long> insertedTransactionIds = new ArrayList<>();
-        targetCurrencyCodes.forEach((targetCurrencyCode) -> {
+        targetCurrencyCodes.forEach(targetCurrencyCode -> {
             Transaction transaction = new Transaction();
             transaction.setAmount(amount);
             transaction.setCurrencyExchangeCode(sourceCurrencyCode + targetCurrencyCode);
             insertedTransactionIds.add(transactionService.createTransaction(transaction));
         });
-        ResponseEntity<List<Long>> responseEntity = new ResponseEntity<>(insertedTransactionIds, HttpStatus.CREATED);
-        return responseEntity;
+        return new ResponseEntity<>(insertedTransactionIds, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/asyncTransaction")
@@ -63,9 +67,9 @@ public class TransactionController {
     @ResponseStatus(HttpStatus.CREATED)
     @Async
     public ResponseEntity<Long> asyncTransaction(@RequestParam String sourceCurrencyCode,@RequestParam String targetCurrencyCode,@RequestParam float amount) {
-        CompletableFuture.runAsync(()->{
-            newTransaction(sourceCurrencyCode,targetCurrencyCode,amount);
-        });
+        CompletableFuture.runAsync(()->
+            newTransaction(sourceCurrencyCode,targetCurrencyCode,amount)
+        );
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
