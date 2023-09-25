@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class TransactionServiceImpl implements TransactionService {
         currencyLog.setTarget(currency.getTarget());
         currencyLogRepository.save(currencyLog);
         transaction.setCurrencyLogId(currencyLog.getId());
+        transaction.setProcessedDate(new Date());
         transaction.setTargetAmount(currency.getExchangeRate() * transaction.getAmount());
         transactionHistoryRepository.save(transaction);
         return transaction.getId();
@@ -60,25 +62,30 @@ public class TransactionServiceImpl implements TransactionService {
         CriteriaQuery<Transaction> criteriaQuery = criteriaBuilder.createQuery(Transaction.class);
         Root<Transaction> root = criteriaQuery.from(Transaction.class);
 
+        List<Predicate> predicates=new ArrayList<>();
         Predicate currencyExchangeCodePredicate = getCurrencyExchangeCodePredicate(source, target, criteriaBuilder, root);
+        if(currencyExchangeCodePredicate!=null) predicates.add(currencyExchangeCodePredicate);
         Join<Transaction, CurrencyLog> currencyLogJoin = root.join("currencyLog");
         Predicate exchangeRatePredicate = getExchangeRatePredicate(rateLowerThan, rateHigherThan, criteriaBuilder, currencyLogJoin);
-        Predicate exchangeDatePredicate = getExchangeDatePredicate(afterThan, beforeThan, criteriaBuilder, currencyLogJoin);
+        if(exchangeRatePredicate!=null) predicates.add(exchangeRatePredicate);
+        Predicate exchangeDatePredicate = getExchangeDatePredicate(afterThan, beforeThan, criteriaBuilder, root);
+        if(exchangeDatePredicate!=null) predicates.add(exchangeDatePredicate);
 
-        CriteriaQuery<Transaction> whereQuery = criteriaQuery.where(currencyExchangeCodePredicate,exchangeRatePredicate,exchangeDatePredicate);
+        Predicate[] predicateArray= predicates.stream().toArray(Predicate[]::new);
+        CriteriaQuery<Transaction> whereQuery = criteriaQuery.where(predicateArray );
         whereQuery.orderBy(criteriaBuilder.asc(root.get(CURRENCY_PROCESSED_DATE)));
         return entityManager.createQuery(whereQuery).getResultList();
     }
 
-    private static Predicate getExchangeDatePredicate(Date afterThan, Date beforeThan, CriteriaBuilder criteriaBuilder, Join<Transaction, CurrencyLog> currencyLogJoin) {
+    private static Predicate getExchangeDatePredicate(Date afterThan, Date beforeThan, CriteriaBuilder criteriaBuilder, Root<Transaction> root) {
         Predicate exchangeDatePredicate=null;
 
         if (afterThan == null && beforeThan != null) {
-            exchangeDatePredicate  = criteriaBuilder.lessThan(currencyLogJoin.get(CURRENCY_PROCESSED_DATE), beforeThan);
+            exchangeDatePredicate  = criteriaBuilder.lessThan(root.get(CURRENCY_PROCESSED_DATE), criteriaBuilder.literal(beforeThan));
         } else if (afterThan != null && beforeThan == null) {
-            exchangeDatePredicate = criteriaBuilder.greaterThan(currencyLogJoin.get(CURRENCY_PROCESSED_DATE), afterThan);
+            exchangeDatePredicate = criteriaBuilder.greaterThan(root.get(CURRENCY_PROCESSED_DATE), criteriaBuilder.literal(afterThan));
         } else if (afterThan != null && beforeThan != null) {
-            exchangeDatePredicate = criteriaBuilder.between(currencyLogJoin.get(CURRENCY_PROCESSED_DATE), afterThan, beforeThan);
+            exchangeDatePredicate = criteriaBuilder.between(root.get(CURRENCY_PROCESSED_DATE), criteriaBuilder.literal(afterThan), criteriaBuilder.literal(beforeThan));
         }
         return exchangeDatePredicate;
     }
@@ -86,11 +93,11 @@ public class TransactionServiceImpl implements TransactionService {
     private static Predicate getExchangeRatePredicate(Double rateLowerThan, Double rateHigherThan, CriteriaBuilder criteriaBuilder, Join<Transaction, CurrencyLog> currencyLogJoin) {
         Predicate exchangeRatePredicate=null;
         if (rateHigherThan == null && rateLowerThan != null) {
-           exchangeRatePredicate  = criteriaBuilder.lessThan(currencyLogJoin.get(CURRENCY_EXCHANGE_RATE), rateLowerThan);
+           exchangeRatePredicate  = criteriaBuilder.lessThan(currencyLogJoin.get(CURRENCY_EXCHANGE_RATE), criteriaBuilder.literal(rateLowerThan));
         } else if (rateHigherThan != null && rateLowerThan == null) {
-            exchangeRatePredicate = criteriaBuilder.greaterThan(currencyLogJoin.get(CURRENCY_EXCHANGE_RATE), rateHigherThan);
+            exchangeRatePredicate = criteriaBuilder.greaterThan(currencyLogJoin.get(CURRENCY_EXCHANGE_RATE), criteriaBuilder.literal(rateHigherThan));
         } else if (rateHigherThan != null && rateLowerThan != null) {
-            exchangeRatePredicate = criteriaBuilder.between(currencyLogJoin.get(CURRENCY_EXCHANGE_RATE), rateHigherThan, rateLowerThan);
+            exchangeRatePredicate = criteriaBuilder.between(currencyLogJoin.get(CURRENCY_EXCHANGE_RATE), criteriaBuilder.literal(rateHigherThan), criteriaBuilder.literal(rateLowerThan));
         }
         return exchangeRatePredicate;
     }

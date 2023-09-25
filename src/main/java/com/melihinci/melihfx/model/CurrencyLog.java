@@ -32,7 +32,7 @@ public class CurrencyLog implements Serializable {
     @Column
     private String target;
     @Column
-    private Date logDate;
+    private Date processedDate;
     @Column
     private double exchangeRate;
 
@@ -41,6 +41,6 @@ public class CurrencyLog implements Serializable {
         this.exchangeRate = currency.getExchangeRate();
         this.source = currency.getSource();
         this.target = currency.getTarget();
-        this.logDate = new Date();
+        this.processedDate = new Date();
     }
 }

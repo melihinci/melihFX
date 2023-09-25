@@ -1,0 +1,850 @@
+{
+	"info": {
+		"_postman_id": "8d9a43fc-3e04-451b-997a-78cc59586d80",
+		"name": "melihFX",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18775581",
+		"_collection_link": "https://crimson-spaceship-652628.postman.co/workspace/a36301f7-64d3-41ec-8a64-7c0f27ab31a1/collection/18775581-8d9a43fc-3e04-451b-997a-78cc59586d80?action=share&source=collection_link&creator=18775581"
+	},
+	"item": [
+		{
+			"name": "/newTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sourceCurrencyCode",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "targetCurrencyCode",
+							"value": "TRY",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/newTransaction",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"newTransaction"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "sampleResponse",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "targetCurrencyCode",
+									"value": "TRY",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/newTransaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"newTransaction"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 07:34:32 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "1000006"
+				}
+			]
+		},
+		{
+			"name": "/createTransactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sourceCurrencyCode",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "targetCurrencyCodes",
+							"value": "TRY,EUR",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/createTransactions",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"createTransactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/createTransactions",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "targetCurrencyCodes",
+									"value": "TRY,EUR",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/createTransactions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"createTransactions"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 07:27:25 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    1000002,\n    1000003\n]"
+				}
+			]
+		},
+		{
+			"name": "/asyncTransaction",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sourceCurrencyCode",
+							"value": "USD",
+							"type": "text"
+						},
+						{
+							"key": "targetCurrencyCode",
+							"value": "TRY",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "50",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/asyncTransaction",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"asyncTransaction"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/asyncTransaction",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "targetCurrencyCode",
+									"value": "TRY",
+									"type": "text"
+								},
+								{
+									"key": "amount",
+									"value": "50",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/asyncTransaction",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"asyncTransaction"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "plain",
+					"header": [
+						{
+							"key": "Content-Length",
+							"value": "0"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 07:34:18 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": null
+				}
+			]
+		},
+		{
+			"name": "/transaction",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/transaction/1000001",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"transaction",
+						"1000001"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "sampleResponse",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/transaction/1000001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"transaction",
+								"1000001"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 07:33:30 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": 1000001,\n    \"currencyExchangeCode\": \"USDTRY\",\n    \"amount\": 250,\n    \"targetAmount\": 6800.0625,\n    \"processedDate\": null,\n    \"currencyLogId\": 100097\n}"
+				}
+			]
+		},
+		{
+			"name": "/listTransactions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "sourceCurrencyCode",
+							"value": "USD",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "targetCurrencyCode",
+							"value": "EUR",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "greaterThan",
+							"value": "0.8",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "lesserThan",
+							"value": "2",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "after",
+							"value": "2023-09-24T11:11:11.000Z",
+							"type": "text"
+						},
+						{
+							"key": "before",
+							"value": "2023-09-26T11:11:11.000Z",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/listTransactions",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"listTransactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "/listTransactions",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/listTransactions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"listTransactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 07:59:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1000000,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.2400499999999,\n        \"processedDate\": null,\n        \"currencyLogId\": 100016\n    },\n    {\n        \"id\": 1000001,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.2400499999999,\n        \"processedDate\": null,\n        \"currencyLogId\": 100017\n    },\n    {\n        \"id\": 1000002,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.2400499999999,\n        \"processedDate\": null,\n        \"currencyLogId\": 100018\n    },\n    {\n        \"id\": 1000003,\n        \"currencyExchangeCode\": \"USDEUR\",\n        \"amount\": 50,\n        \"targetAmount\": 47.008250000000004,\n        \"processedDate\": null,\n        \"currencyLogId\": 100019\n    }\n]"
+				},
+				{
+					"name": "/listTransactions source & gate",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetCurrencyCode",
+									"value": "EUR",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "greaterThan",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lesserThan",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/listTransactions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"listTransactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 08:04:38 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1000003,\n        \"currencyExchangeCode\": \"USDEUR\",\n        \"amount\": 50,\n        \"targetAmount\": 47.008250000000004,\n        \"processedDate\": null,\n        \"currencyLogId\": 100019\n    }\n]"
+				},
+				{
+					"name": "/listTransactions greaterthan",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text"
+								},
+								{
+									"key": "targetCurrencyCode",
+									"value": "EUR",
+									"type": "text"
+								},
+								{
+									"key": "greaterThan",
+									"value": "0.8",
+									"type": "text"
+								},
+								{
+									"key": "lesserThan",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "after",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "before",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/listTransactions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"listTransactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 08:07:54 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1000001,\n        \"currencyExchangeCode\": \"USDEUR\",\n        \"amount\": 50,\n        \"targetAmount\": 46.99225,\n        \"processedDate\": \"2023-09-25T08:06:34.455+00:00\",\n        \"currencyLogId\": 100017\n    }\n]"
+				},
+				{
+					"name": "/listTransactions DATE",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "targetCurrencyCode",
+									"value": "EUR",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "greaterThan",
+									"value": "0.8",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "lesserThan",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "after",
+									"value": "2022-09-22 11:11:11",
+									"type": "text"
+								},
+								{
+									"key": "before",
+									"value": "2024-09-22 11:11:11",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/listTransactions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"listTransactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 08:51:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1000000,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.46485,\n        \"processedDate\": \"2023-09-25T08:50:51.298+00:00\",\n        \"currencyLogId\": 100016\n    },\n    {\n        \"id\": 1000001,\n        \"currencyExchangeCode\": \"USDEUR\",\n        \"amount\": 50,\n        \"targetAmount\": 47.04925,\n        \"processedDate\": \"2023-09-25T08:50:51.308+00:00\",\n        \"currencyLogId\": 100017\n    },\n    {\n        \"id\": 1000002,\n        \"currencyExchangeCode\": \"USDJPY\",\n        \"amount\": 50,\n        \"targetAmount\": 7427.04905,\n        \"processedDate\": \"2023-09-25T08:50:51.311+00:00\",\n        \"currencyLogId\": 100018\n    }\n]"
+				}
+			]
+		},
+		{
+			"name": "/listTransactions ALL",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": [
+				{
+					"name": "/listTransactions",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "sourceCurrencyCode",
+									"value": "USD",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/listTransactions",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"listTransactions"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 25 Sep 2023 07:59:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "[\n    {\n        \"id\": 1000000,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.2400499999999,\n        \"processedDate\": null,\n        \"currencyLogId\": 100016\n    },\n    {\n        \"id\": 1000001,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.2400499999999,\n        \"processedDate\": null,\n        \"currencyLogId\": 100017\n    },\n    {\n        \"id\": 1000002,\n        \"currencyExchangeCode\": \"USDTRY\",\n        \"amount\": 50,\n        \"targetAmount\": 1360.2400499999999,\n        \"processedDate\": null,\n        \"currencyLogId\": 100018\n    },\n    {\n        \"id\": 1000003,\n        \"currencyExchangeCode\": \"USDEUR\",\n        \"amount\": 50,\n        \"targetAmount\": 47.008250000000004,\n        \"processedDate\": null,\n        \"currencyLogId\": 100019\n    }\n]"
+				}
+			]
+		}
+	]
+}
